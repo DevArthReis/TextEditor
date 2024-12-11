@@ -39,7 +39,9 @@ namespace TextEditor
 
             
         }
-        static void salvar(){
+        static void salvar(string text){
+            Console.Clear();
+            Console.WriteLine("Qual o caminho pra salvar o arquivo?");
             
         }
     }
