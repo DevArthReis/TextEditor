@@ -32,6 +32,7 @@ namespace TextEditor
             string text = "";
             do{
                 text += Console.ReadLine();
+                text += Environment.NewLine;
             }
             while(Console.ReadKey().Key != ConsoleKey.Escape);
 
