@@ -35,7 +35,11 @@ namespace TextEditor
                 text += Environment.NewLine;
             }
             while(Console.ReadKey().Key != ConsoleKey.Escape);
+            Console.Write(text);
 
+            
+        }
+        static void salvar(){
             
         }
     }
