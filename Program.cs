@@ -3,51 +3,79 @@ using System.IO;
 
 namespace TextEditor
 {
-    class Program{
-        static void Main(string[]args){
+    class Program
+    {
+        static void Main(string[] args)
+        {
             Menu();
         }
-        static void Menu(){
+
+        static void Menu()
+        {
             Console.Clear();
-            Console.WriteLine("o que vc deseja fazer?");
-            Console.WriteLine("1- Abrir arquivo");
-            Console.WriteLine("2- Criar novo arquivo");
-            Console.WriteLine("0- Sair");
+            Console.WriteLine("O que você deseja fazer?");
+            Console.WriteLine("1 - Abrir arquivo");
+            Console.WriteLine("2 - Criar novo arquivo");
+            Console.WriteLine("0 - Sair");
             short option = short.Parse(Console.ReadLine());
-            switch(option)
+
+            switch (option)
             {
-                case 0 :System.Environment.Exit(0); break;
-                case 1 :Abrir();break;
-                case 2 :Editar();break;
-                default: Menu();break;          
+                case 0: System.Environment.Exit(0); break;
+                case 1: Abrir(); break;
+                case 2: Editar(); break;
+                default: Menu(); break;
             }
         }
-        static void Abrir(){
+
+        static void Abrir()
+        {
             Console.Clear();
-            
+            Console.WriteLine("Qual caminho do arquivo?");
+            string path = Console.ReadLine();
+
+            using (var file = new StreamReader(path))
+            {
+                string text = file.ReadToEnd();
+                Console.WriteLine(text);
+            }
+
+            Console.WriteLine("");
+            Console.ReadLine();
+            Menu();
         }
-        static void Editar(){
+
+        static void Editar()
+        {
             Console.Clear();
-            Console.WriteLine("Digite seu texto abaixo(ESC para sair)");
-            Console.WriteLine("-----------------------");
+            Console.WriteLine("Digite seu texto abaixo (ESC para sair)");
+            Console.WriteLine("----------------");
             string text = "";
-            do{
+
+            do
+            {
                 text += Console.ReadLine();
                 text += Environment.NewLine;
             }
-            while(Console.ReadKey().Key != ConsoleKey.Escape);
-            Console.Write(text);
+            while (Console.ReadKey().Key != ConsoleKey.Escape);
 
-            
+            Salvar(text);
         }
-        static void salvar(string text){
+
+        static void Salvar(string text)
+        {
             Console.Clear();
-            Console.WriteLine("Qual o caminho pra salvar o arquivo?");
-            var path =  Console.ReadLine();
+            Console.WriteLine("Qual caminho para salvar o arquivo?");
+            var path = Console.ReadLine();
+
             using (var file = new StreamWriter(path))
             {
-               file.Write(text); 
+                file.Write(text);
             }
+
+            Console.WriteLine($"Arquivo {path} salvo com sucesso!");
+            Console.ReadLine();
+            Menu();
         }
     }
 }
